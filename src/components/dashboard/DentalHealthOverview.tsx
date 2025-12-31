@@ -1,4 +1,4 @@
-import { getUserAppointmentStats } from '@/lib/actions/appoinments'
+import { getUserAppointmentStats } from '@/lib/actions/appointments'
 import { currentUser } from '@clerk/nextjs/server';
 import React from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
