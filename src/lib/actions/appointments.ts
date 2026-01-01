@@ -2,6 +2,7 @@
 
 import { auth } from "@clerk/nextjs/server";
 import { prisma } from "../prisma";
+import { AppointmentStatus } from "@/generated/prisma/enums";
 
 function transformAppointment(appointment: any) {
   return {
@@ -15,9 +16,9 @@ function transformAppointment(appointment: any) {
 }
 
 
-export async function getAppoinments() {
+export async function getAppointments() {
     try {
-        const appoinments = await prisma.appointment.findMany({
+        const appointments = await prisma.appointment.findMany({
             include: {
                 user: {
                     select: {
@@ -34,7 +35,7 @@ export async function getAppoinments() {
                 createdAt: "desc"
             },
         });
-        return appoinments;
+        return appointments.map(transformAppointment);
     } catch (error) {
         console.log("Error fetching appointments:", error);
         throw new Error("failed to fetch appoinments");
@@ -164,5 +165,19 @@ export async function bookAppointment(input: BookAppointmentInput) {
   } catch (error) {
     console.error("Error booking appointment:", error);
     throw new Error("Failed to book appointment. Please try again later.");
+  }
+}
+
+export async function updateAppointmentStatus(input:{id:string; status:AppointmentStatus}) {
+  try {
+    const appointment = await prisma.appointment.update({
+      where: {id: input.id},
+      data: {status: input.status}
+    })
+
+    return appointment
+  } catch (error) {
+    console.error("Error updating appointment:", error);
+    throw new Error("Failed to update appointment");
   }
 }
