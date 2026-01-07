@@ -36,7 +36,7 @@ function AppointmentConfirmationEmail({
         <Container style={container}>
           <Section style={logoContainer}>
             <Img
-              src="logo.png"
+              src="https://dentwise-lgdo.onrender.com/logo.png"
               width="50"
               height="50"
               alt="DentWise"
