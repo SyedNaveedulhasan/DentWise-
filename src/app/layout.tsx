@@ -30,7 +30,7 @@ export default function RootLayout({
     <TanStackProvider>
     <ClerkProvider appearance={{
       variables: {
-        colorPrimary: "#e78a53",
+        colorPrimary: "#a48fff",
         colorBackground: "#f3f4f6",
         colorText: "#111827",
         colorTextSecondary: "#6b7280",
