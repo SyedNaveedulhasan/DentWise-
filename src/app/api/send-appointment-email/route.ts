@@ -1,5 +1,5 @@
 import AppointmentConfirmationEmail from "@/components/emails/AppointmentConfirmationEmail";
-import resend from "@/lib/resend";
+import { getResendClient } from "@/lib/resend";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
@@ -20,6 +20,8 @@ export async function POST(request: Request) {
     if (!userEmail || !doctorName || !appointmentDate || !appointmentTime) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
+
+    const resend = getResendClient();
 
     // send the email
     // do not use this in prod, only for testing purposes
