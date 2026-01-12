@@ -93,7 +93,7 @@ const VapiWidget = () => {
         setMessages([]);
         setCallEnded(false);
 
-        await vapi.start(process.env.NEXT_PUBLIC_VAPI_ASSISTANT_ID)
+        await vapi.start(process.env.VAPI_ASSISTANT_ID)
       } catch (error) {
         console.log("Failed to start call", error);
         setConnecting(false);
