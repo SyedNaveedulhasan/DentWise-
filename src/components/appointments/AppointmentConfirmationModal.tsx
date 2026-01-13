@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { CheckCircleIcon, MailIcon, CalendarIcon, ClockIcon, UserIcon } from "lucide-react";
+import { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -21,11 +22,28 @@ interface AppointmentConfirmationModalProps {
   };
 }
 
+
 export function AppointmentConfirmationModal({
   open,
   onOpenChange,
   appointmentDetails,
 }: AppointmentConfirmationModalProps) {
+
+const audioRef = useRef<HTMLAudioElement | null>(null);
+
+useEffect(() => {
+  if (!audioRef.current) {
+    audioRef.current = new Audio("/bell.mp3");
+  }
+
+  if (open) {
+    audioRef.current.currentTime = 0; 
+    audioRef.current.play().catch(() => {
+      
+    });
+  }
+}, [open]);
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-md max-h-[95vh] overflow-y-auto">
